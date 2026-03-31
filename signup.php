@@ -9,24 +9,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 include 'partials/_dbconn.php';
 
 $username = $_POST['username'];
+$email = $_POST['email'];
 $password = $_POST['password'];
 $cpassword = $_POST['cpassword'];
 
-
 // include 'partials/_dbconn.php/';
+// $sql = "SELECT * FROM users WHERE username = '$username' AND email = '$email'";
 
-$sql = "SELECT * FROM users WHERE username = '$username'";
+$sql = "SELECT * FROM users WHERE (username='$username' or email='$email')";
+
 $result = mysqli_query($conn, $sql);
-$exist = mysqli_num_rows($result) > 0;
+// $exist = mysqli_num_rows($result) > 0;
 
-if($exist){
-    $showError = "Username already exists";
+if(mysqli_num_rows($result) > 0){
+    // $showError = "Email already exists";
+    $row = mysqli_fetch_assoc($result);
+    if($email==isset($row['email']))
+    {
+        $showError = "Email already exists";
+    }
+		elseif($username==isset($row['username']))
+    {
+        $showError = "Username already exists";
+    }
 }
+
+// if(mysqli_num_rows($result) > 0){
+//     // $showError = "Email already exists";
+//     $row = mysqli_fetch_assoc($result);
+//     if($email == $row['email'])
+//     {
+//         $showError = "Email already exists";
+//     }
+// 		if($username == $row['username'])
+//     {
+//         $showError = "Username already exists";
+//     }
+// }
+
 else if($password != $cpassword){
     $showError = "Passwords do not match";
 }
 else {
-    $sql = "INSERT INTO `users` (`username`, `password`, `dt`) VALUES ('$username','$password',current_timestamp())";
+    $sql = "INSERT INTO `users` (`email`,`username`, `password`, `dt`) VALUES ('$email','$username','$password',current_timestamp())";
     $result = mysqli_query($conn, $sql);
     if($result){
         $showAlert = true;
@@ -65,7 +90,7 @@ else {
     if($showError){
     echo'
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Success!</strong> '. $showError .'
+    <strong>Try Again !</strong> '. $showError .'
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>';
     };
@@ -81,7 +106,8 @@ else {
     ?>
     <div class="container">
 
-      <div class="container my-5">
+      <h3 class="p-5 text-center">Sign Up to Website</h3>
+      <!-- <div class="container my-5">
   <div class="p-5 text-center bg-gradient rounded-4 shadow-lg " style="background: linear-gradient(135deg, #3c5c38 0%, #455062 100%);">
     <h1 class="display-3 fw-bold text-white mb-3" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.3);">
       Sign Up to Our Website
@@ -91,12 +117,17 @@ else {
     </p>
     <i class="bi bi-stars" style="font-size: 2rem; color: #ffdd00;"></i>
   </div>
-</div>
+</div> -->
 
         <form action = 'signup.php' method = 'POST'>
+
+        <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Enter Email">
+</div>
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="text" class="form-control" id="username" name='username' aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="text" class="form-control" id="username" name='username' aria-describedby="emailHelp" placeholder="Enter Username">
 </div>
 <div class="form-group">
     <label for="password">Password</label>

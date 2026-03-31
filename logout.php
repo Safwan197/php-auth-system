@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+session_destroy();
+session_unset();
+header("location: login.php");
+exit();
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
