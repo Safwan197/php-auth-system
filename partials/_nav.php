@@ -7,22 +7,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/loginsystem/welcome.php">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/loginsystem/dashboard.php">Home<span class="sr-only">(current)</span></a>
       </li>
 
       <!-- Li 1 -->
       <li class="nav-item">
-          <a class="nav-link" href="/loginsystem/login.php">Login</a>
+          <a class="nav-link" href="/loginsystem/auth/login.php">Login</a>
         </li>
         
         <!-- Li 2 -->
         <li class="nav-item">
-            <a class="nav-link" href="/loginsystem/signup.php">Sign Up</a>
+            <a class="nav-link" href="/loginsystem/auth/signup.php">Sign Up</a>
         </li>
         
         <!-- Li 3 -->
       <li class="nav-item">
-        <a class="nav-link" href="/loginsystem/logout.php">Logout</a>
+        <a class="nav-link" href="/loginsystem/auth/logout.php">Logout</a>
       </li>
 
     </ul>

@@ -1,18 +1,10 @@
 <?php
 
 session_start();
-
 if(!isset($_SESSION['username']) or $_SESSION['username'] !=true){
-  $_SESSION['expire'] = $_SESSION['start'] + (10);
-  header('location: login.php');
-  exit();
-  }
-
-  // session_start();
-
-  if(time() > $_SESSION['expire']){
-    header("location: logout.php");
-  }
+    header('location: auth/login.php');
+    exit();
+}
 
 ?>
 

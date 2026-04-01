@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-session_destroy();
 session_unset();
+session_destroy();
 header("location: login.php");
 exit();
 ?>
@@ -17,11 +17,11 @@ exit();
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Welcome</title>
+    <title>dashboard</title>
   </head>
   <body>
 
-  <?php require 'partials/_nav.php'?>
+  <?php require '../partials/_nav.php'?>
 
     <!-- <h1>Hello, world!</h1> -->
 

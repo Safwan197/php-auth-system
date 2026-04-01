@@ -2,11 +2,11 @@
 
 $showAlert = false;
 $showError = false;
-$exist = false;
+// $exist = false;
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-include 'partials/_dbconn.php';
+include '../partials/_dbconn.php';
 
 $username = $_POST['username'];
 $email = $_POST['email'];
@@ -19,22 +19,36 @@ $cpassword = $_POST['cpassword'];
 $sql = "SELECT * FROM users WHERE (username='$username' or email='$email')";
 
 $result = mysqli_query($conn, $sql);
+
 // $exist = mysqli_num_rows($result) > 0;
 
 if(mysqli_num_rows($result) > 0){
-    // $showError = "Email already exists";
-    $row = mysqli_fetch_assoc($result);
-    if($email==isset($row['email']))
-    {
-        $showError = "Email already exists";
+        while($row = mysqli_fetch_assoc($result)){
+            if(isset($row['email']) && $row['email'] == $email){
+                $showError = "Email already exists";
+              }
+                
+            if(isset($row['username']) && $row['username'] == $username){
+
+              $showError = "Username already exists";
+              }
+        }
+  }
+      
+  elseif($password != $cpassword){
+    $showError = "Passwords do not match";
     }
-		elseif($username==isset($row['username']))
-    {
-        $showError = "Username already exists";
+  else{
+      $sql = "INSERT INTO `users` (`email`,`username`, `password`, `dt`) VALUES ('$email','$username','$password',current_timestamp())";
+      $result = mysqli_query($conn, $sql);
+      if($result){
+        $showAlert = true;
+        // header("location: login.php");
+      }
     }
 }
 
-// if(mysqli_num_rows($result) > 0){
+        // if(mysqli_num_rows($result) > 0){
 //     // $showError = "Email already exists";
 //     $row = mysqli_fetch_assoc($result);
 //     if($email == $row['email'])
@@ -43,23 +57,11 @@ if(mysqli_num_rows($result) > 0){
 //     }
 // 		if($username == $row['username'])
 //     {
-//         $showError = "Username already exists";
-//     }
-// }
+  //         $showError = "Username already exists";
+  //     }
+  // }
 
-else if($password != $cpassword){
-    $showError = "Passwords do not match";
-}
-else {
-    $sql = "INSERT INTO `users` (`email`,`username`, `password`, `dt`) VALUES ('$email','$username','$password',current_timestamp())";
-    $result = mysqli_query($conn, $sql);
-    if($result){
-        $showAlert = true;
-    }
-}
-}
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -75,7 +77,7 @@ else {
   </head>
   <body>
 
-  <?php require 'partials/_nav.php'?>
+  <?php require '../partials/_nav.php'?>
 
   <?php
 
@@ -95,13 +97,6 @@ else {
     </div>';
     };
 
-    // if($exist){
-    // echo'
-    // <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    // <strong>Success!</strong> Username already exists
-    // <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    // </div>';
-    // };
     
     ?>
     <div class="container">

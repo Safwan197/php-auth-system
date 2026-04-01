@@ -5,7 +5,7 @@ $showError = false;
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-include 'partials/_dbconn.php';
+include '../partials/_dbconn.php';
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -22,7 +22,7 @@ if($num > 0){
   session_start();
   $_SESSION['loggedin'] = true;
   $_SESSION['username'] = $username;
-  header("location: welcome.php");
+  header("location: ../dashboard.php");
 
 }
 else{
@@ -44,7 +44,7 @@ else{
   </head>
   <body>
 
-  <?php require 'partials/_nav.php'?>
+  <?php require '../partials/_nav.php'?>
 
   <?php
 
@@ -80,7 +80,7 @@ else{
   </div>
 </div> -->
 
-        <form action = '/loginsystem/login.php' method = 'POST'>
+        <form action = '/loginsystem/auth/login.php' method = 'POST'>
 
   <div class="form-group">
     <label for="username">Username</label>
