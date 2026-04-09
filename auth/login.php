@@ -22,7 +22,7 @@ if($num > 0){
   session_start();
   $_SESSION['loggedin'] = true;
   $_SESSION['username'] = $username;
-  header("location: ../dashboard.php");
+  header("location: ../dashboard/index.php");
 
 }
 else{
@@ -68,17 +68,6 @@ else{
     <div class="container">
 
       <h3 class="p-5 text-center">Login Website</h3>
-      <!-- <div class="container my-5">
-  <div class="p-5 text-center bg-gradient rounded-4 shadow-lg " style="background: linear-gradient(135deg, #3c5c38 0%, #455062 100%);">
-    <h1 class="display-3 fw-bold text-white mb-3" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.3);">
-      Sign Up to Our Website
-    </h1>
-    <p class="lead text-white-50 fs-4">
-      Create your account and join our amazing community!
-    </p>
-    <i class="bi bi-stars" style="font-size: 2rem; color: #ffdd00;"></i>
-  </div>
-</div> -->
 
         <form action = '/loginsystem/auth/login.php' method = 'POST'>
 
@@ -95,10 +84,10 @@ else{
 </form>
 
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
 </html>
+```
