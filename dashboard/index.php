@@ -21,10 +21,9 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] !=true){
     <title>Welcome - <?php echo $_SESSION['username']?></title>
   </head>
   <body>
+    
 
-  
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/loginsystem">iSecure</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -32,16 +31,17 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] !=true){
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <!-- Li 1 -->
       <li class="nav-item active">
         <a class="nav-link" href="/loginsystem/dashboard/index.php">Home<span class="sr-only">(current)</span></a>
       </li>
 
-      <!-- Li 1 -->
+      <!-- Li 2 -->
       <li class="nav-item">
-          <a class="nav-link" href="/loginsystem/dashboard/add_product.php">Add</a>
+          <a class="nav-link" href="/loginsystem/dashboard/add_product.php">Add Product</a>
         </li>
         
-        <!-- Li 2 -->
+        <!-- Li 3 -->
       <li class="nav-item">
         <a class="nav-link" href="/loginsystem/auth/logout.php">Logout</a>
       </li>
@@ -53,8 +53,6 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] !=true){
     </form>
   </div>
 </nav>
-
-
 <?php
 include '../partials/_dbconn.php';
 
@@ -68,6 +66,7 @@ $result = $conn->query($sql);
       <th>Name</th>
       <th>Quantity</th>
       <th>Price</th>
+      <th>Image</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -79,6 +78,8 @@ $result = $conn->query($sql);
             echo "<td>".$row['name']."</td>";
             echo "<td>".$row['quantity']."</td>";
             echo "<td>".$row['price']."</td>";
+            $imgPath = !empty($row['image']) ? "../images/".$row['image'] : "https://via.placeholder.com/80";
+            echo "<td><img src='".$imgPath."' width='80' height='80' class='img-thumbnail'></td>";
 
             // Edit and Delete buttons
             echo "<td>
@@ -93,8 +94,7 @@ $result = $conn->query($sql);
     ?>
   </tbody>
 </table>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
